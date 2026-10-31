@@ -1,0 +1,13 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/add-the-admin"
+  to = "/admin.html"
+  status = 200
+
+[[redirects]]
+  from = "/portfolio-arshu"
+  to = "/index.html"
+  status = 200
