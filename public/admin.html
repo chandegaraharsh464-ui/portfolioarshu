@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Admin</title><meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf9f6;--bg2:#f1f3ee;--ink:#2b2f2a;--mute:#7b837a;--sage:#a9b8a0;--sage2:#6f8268;--line:#e2e6dd;--card:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1e1a;--bg2:#222620;--ink:#eef0ea;--mute:#a2aa9f;--line:#333a31;--card:#262b24}}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+body{background:var(--bg);color:var(--ink);font:300 16px/1.7 Jost,system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;letter-spacing:.02em}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:22px;justify-content:center;flex-wrap:wrap;padding:14px 20px;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+nav a{color:var(--mute);text-decoration:none;transition:.3s}nav a:hover{color:var(--sage2)}
+.hero{min-height:88vh;display:grid;place-content:center;text-align:center;padding:40px 24px;background:radial-gradient(circle at 20% 20%,var(--bg2),transparent 55%),radial-gradient(circle at 85% 80%,#a9b8a033,transparent 50%)}
+.hero small{letter-spacing:.4em;text-transform:uppercase;color:var(--sage2);font-size:12px;animation:up 1.2s both}
+.hero h1{font-size:clamp(48px,10vw,116px);line-height:1.02;margin:14px 0;animation:up 1.4s .2s both}
+.hero p{max-width:520px;margin:auto;color:var(--mute);animation:up 1.4s .5s both}
+.hero .line{width:1px;height:70px;background:var(--sage2);margin:34px auto 0;animation:grow 1.8s .8s both}
+@keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@keyframes grow{from{height:0}to{height:70px}}
+section{padding:90px 6vw;max-width:1200px;margin:auto}
+section h2{font-size:clamp(34px,5vw,56px);text-align:center}
+section .sub{text-align:center;color:var(--mute);margin:6px auto 44px;max-width:560px}
+section h2:after{content:"";display:block;width:46px;height:1px;background:var(--sage);margin:14px auto 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px}
+.card{background:var(--card);border:1px solid var(--line);cursor:pointer;overflow:hidden;transition:.5s}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px #6f826822}
+.card .im{aspect-ratio:3/4;background:linear-gradient(135deg,var(--bg2),var(--sage));overflow:hidden}
+.card img{width:100%;height:100%;object-fit:cover;transition:1s}.card:hover img{transform:scale(1.07)}
+.card div.t{padding:16px 18px}.card h3{font-size:24px}.card p{font-size:13px;color:var(--mute)}
+.alt{background:var(--bg2);max-width:none}.alt>*{max-width:1200px;margin-left:auto;margin-right:auto}
+.rv{opacity:0;transform:translateY(36px);transition:1s cubic-bezier(.2,.7,.2,1)}.rv.on{opacity:1;transform:none}
+.empty{text-align:center;color:var(--mute);font-style:italic;grid-column:1/-1}
+.pdf a,.btn{display:inline-block;padding:12px 28px;border:1px solid var(--sage2);color:var(--sage2);text-decoration:none;letter-spacing:.14em;text-transform:uppercase;font-size:12px;background:none;cursor:pointer;font-family:inherit;transition:.3s}
+.pdf a:hover,.btn:hover{background:var(--sage2);color:#fff}
+.pdf{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.about{display:grid;gap:30px;text-align:center;max-width:720px;margin:auto}.about p{white-space:pre-line;font-size:18px}
+footer{background:var(--ink);color:#eef0ea;text-align:center;padding:70px 24px calc(50px + env(safe-area-inset-bottom,0px))}
+footer h2{color:#eef0ea}footer a{color:var(--sage);text-decoration:none}
+footer .ct{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin:26px 0}
+#lb{position:fixed;inset:0;z-index:20;background:#101310ee;display:none;overflow:auto;padding:50px 5vw;color:#fff}
+#lb.on{display:block;animation:up .5s}#lb h3{font-size:38px;text-align:center}#lb p{text-align:center;opacity:.7;margin-bottom:24px}
+#lb .gal{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));max-width:1200px;margin:auto}
+#lb img{width:100%;border-radius:2px}#lb .x{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:22px;font-size:34px;cursor:pointer;background:none;border:0;color:#fff}
+#lb a.f{color:var(--sage);display:block;padding:12px;border:1px solid #fff3}
+.hero{position:relative;overflow:hidden}.hc{position:relative}
+.shapes{position:absolute;inset:0;pointer-events:none}.shapes b{position:absolute;display:block}
+.shapes i{display:block;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,var(--sage));opacity:.4;animation:fl 9s ease-in-out infinite}
+.shapes i.r{background:none;border:1px solid var(--sage2);opacity:.5}
+@keyframes fl{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-34px) rotate(14deg)}}
+.marq{overflow:hidden;white-space:nowrap;border-block:1px solid var(--line);background:var(--card);padding:16px 0}
+.marq div{display:inline-block;animation:mq 34s linear infinite;font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-style:italic;color:var(--sage2);letter-spacing:.1em}
+.marq span{margin:0 26px}@keyframes mq{to{transform:translateX(-50%)}}
+#glow{position:fixed;left:0;top:0;width:340px;height:340px;margin:-170px 0 0 -170px;border-radius:50%;background:radial-gradient(circle,#a9b8a066,transparent 65%);pointer-events:none;z-index:30;opacity:0;transition:opacity .4s}
+@media(hover:none){#glow{display:none}}
+input[type=checkbox]{width:auto;margin-right:10px}.tg{display:flex;align-items:center;margin:8px 0;text-transform:none;letter-spacing:0;font-size:15px;color:var(--ink)}
+/* admin */
+.adm{max-width:960px;margin:auto;padding:30px 5vw 80px}
+.adm h1{font-size:44px;text-align:center}.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:20px 0 28px}
+.tabs button{padding:8px 16px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;font:inherit;font-size:13px}
+.tabs button.on{background:var(--sage2);color:#fff;border-color:var(--sage2)}
+.panel{background:var(--card);border:1px solid var(--line);padding:24px;margin-bottom:20px}
+label{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:14px 0 4px}
+input,textarea{width:100%;padding:11px 13px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+textarea{min-height:110px}.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:16px}
+.it{display:flex;gap:14px;align-items:center;padding:12px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.it img,.it .ph{width:56px;height:70px;object-fit:cover;background:var(--bg2)}.it b{flex:1;min-width:120px;font-weight:500}
+.sm{padding:6px 12px;font-size:11px}.msg{color:var(--sage2);font-size:13px}
+.login{max-width:360px;margin:20vh auto;text-align:center;padding:0 20px}.login input{margin:18px 0}
+.sw{text-align:center;padding:30px;font-size:12px}.sw a{color:var(--sage2)}
+</style>
+</head>
+<body><div id="app"></div>
+<script>
+const SECS=[["collections","Collections"],["moodboard","Mood Board"],["storyboard","Storyboard"],["sketches","Sketches"],["outfits","Final Outfits"],["projects","Project Work"],["pdf","Portfolio PDF"]];
+const AN=[["shapes","Floating shapes in hero"],["parallax","Parallax scrolling"],["glow","Cursor glow"],["marquee","Moving text strip"],["reveal","Scroll fade-in"]];
+const DEF={name:"Your Name",role:"Fashion Designer",tagline:"Designing quiet luxury with a soft, modern spirit.",about:"Write a few lines about yourself, your design journey and your vision.",linkedin:"https://www.linkedin.com/",email:"you@email.com",phone:"+91 00000 00000",location:"India",marquee:"Indo-Western · Lehenga with Jacket · Saree Gown · Dhoti & Crop Top · Handcrafted Couture",anim:{shapes:1,parallax:1,glow:1,marquee:1,reveal:1}};
+let C={...DEF},items=[],tok=sessionStorage.getItem("t")||"",tab="text",msg="";
+const $=s=>document.querySelector(s),esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const isImg=f=>(f.type||"").startsWith("image/"),url=f=>"/api/file/"+f.id,set=t=>{const e=$("#st");if(e)e.textContent=t};
+async function api(p,o={}){const r=await fetch("/api/"+p,{...o,headers:{authorization:"Bearer "+tok,...(o.headers||{})}});const j=await r.json().catch(()=>({}));if(!r.ok){if(r.status===401&&p!=="login"){tok="";sessionStorage.removeItem("t");view()}throw new Error(j.error||"Error")}return j}
+async function load(){const j=await (await fetch("/api/data")).json();const c=j.content||{};C={...DEF,...c,anim:{...DEF.anim,...(c.anim||{})}};items=j.items||[]}
+const save=()=>api("save",{method:"POST",body:JSON.stringify({content:C,items})});
+function view(){
+ if(!tok){$("#app").innerHTML=`<div class="login"><h1>Admin</h1><p style="color:var(--mute)">Please log in</p><input id="id" placeholder="Admin ID" autocomplete="username"><input id="pw" type="password" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()"><button class="btn" onclick="login()">Enter</button><p class="msg">${esc(msg)}</p><p class="sw"><a href="/">← View website</a></p></div>`;return}
+ const tabs=[["text","Text & Contact"],...SECS];let body="";
+ if(tab==="text"){const f=[["name","Name"],["role","Role / title"],["tagline","Hero tagline"],["linkedin","LinkedIn link"],["email","Email"],["phone","Phone"],["location","Location"]];
+  body=`<div class="panel">${f.map(([k,l])=>`<label>${l}</label><input id="f_${k}" value="${esc(C[k])}">`).join("")}<label>About me</label><textarea id="f_about">${esc(C.about)}</textarea><label>Moving text strip (separate words with ·)</label><input id="f_marquee" value="${esc(C.marquee)}"><label>Animations (turn on / off)</label>${AN.map(([k,l])=>`<label class="tg"><input type="checkbox" id="a_${k}" ${C.anim[k]?"checked":""}>${l}</label>`).join("")}<div class="row"><button class="btn" onclick="saveText()">Save changes</button><span class="msg" id="st">${esc(msg)}</span></div></div>`}
+ else{const l=items.filter(i=>i.section===tab).sort((a,b)=>a.ts-b.ts),nm=tabs.find(t=>t[0]===tab)[1];
+  body=`<div class="panel"><h3 style="font-size:28px">Add to ${nm}</h3><label>Title</label><input id="n_t"><label>Description</label><textarea id="n_d" style="min-height:70px"></textarea><label>Files (select many: images, PDF, video up to 5 MB each)</label><input id="n_f" type="file" multiple><div class="row"><button class="btn" onclick="addItem()">Upload & add</button><span class="msg" id="st">${esc(msg)}</span></div></div><div class="panel">${l.length?l.map(i=>{const f=(i.files||[]).find(isImg);return `<div class="it">${f?`<img src="${url(f)}">`:`<div class="ph"></div>`}<b>${esc(i.title)}<br><small style="color:var(--mute)">${(i.files||[]).length} file(s)</small></b><label class="btn sm" style="margin:0">+ Files<input type="file" multiple hidden onchange="moreFiles('${i.id}',this)"></label><button class="btn sm" onclick="rename('${i.id}')">Rename</button><button class="btn sm" onclick="delItem('${i.id}')">Delete</button></div>`}).join(""):`<p class="empty">Nothing here yet. Samples show on the website until you add your own.</p>`}</div>`}
+ $("#app").innerHTML=`<div class="adm"><h1>Admin Studio</h1><div class="tabs">${tabs.map(t=>`<button class="${tab===t[0]?"on":""}" onclick="tab='${t[0]}';msg='';view()">${t[1]}</button>`).join("")}</div>${body}<p class="sw"><a href="/" target="_blank">View website</a> · <a href="#" onclick="tok='';sessionStorage.removeItem('t');view();return false">Log out</a></p></div>`}
+async function login(){try{const r=await api("login",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({id:$("#id").value.trim(),pass:$("#pw").value})});tok=r.token;sessionStorage.setItem("t",tok);msg="";await load();view()}catch(e){msg=e.message;view()}}
+async function saveText(){["name","role","tagline","linkedin","email","phone","location","about","marquee"].forEach(k=>C[k]=$("#f_"+k).value);C.anim={};AN.forEach(([k])=>C.anim[k]=$("#a_"+k).checked?1:0);try{await save();msg="Saved ✓ (live on website)"}catch(e){msg="Failed: "+e.message}view()}
+async function prep(f){if(!f.type.startsWith("image/")||f.type==="image/svg+xml")return f;const bm=await createImageBitmap(f),k=Math.min(1,1800/Math.max(bm.width,bm.height)),c=document.createElement("canvas");c.width=bm.width*k;c.height=bm.height*k;c.getContext("2d").drawImage(bm,0,0,c.width,c.height);return new Promise(r=>c.toBlob(r,"image/jpeg",.86))}
+async function up(files){const out=[];let n=0;for(const f of files){n++;set(`Uploading ${n}/${files.length}…`);const b=await prep(f);if(b.size>5.5e6)throw new Error(f.name+" is bigger than 5.5 MB");const type=b.type||f.type||"application/octet-stream",r=await api("upload?type="+encodeURIComponent(type),{method:"POST",body:b});out.push({id:r.id,name:f.name,type})}return out}
+async function addItem(){const fl=[...$("#n_f").files],t=$("#n_t").value.trim();if(!fl.length&&!t)return set("Add a title or files");try{const files=await up(fl);items.push({id:"i"+Date.now(),section:tab,title:t||"Untitled",desc:$("#n_d").value,files,ts:Date.now()});await save();msg="Added ✓ (live on website)"}catch(e){msg="Failed: "+e.message}view()}
+async function moreFiles(id,inp){const i=items.find(x=>x.id===id);try{i.files=[...(i.files||[]),...await up([...inp.files])];await save();msg="Files added ✓"}catch(e){msg="Failed: "+e.message}view()}
+async function rename(id){const i=items.find(x=>x.id===id),t=prompt("New title",i.title);if(t){i.title=t;await save();view()}}
+async function delItem(id){if(!confirm("Delete this item?"))return;const i=items.find(x=>x.id===id);items=items.filter(x=>x.id!==id);await save();for(const f of i.files||[])api("rmfile",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({id:f.id})}).catch(()=>{});view()}
+view();if(tok)load().then(view).catch(()=>{});
+</script></body></html>
