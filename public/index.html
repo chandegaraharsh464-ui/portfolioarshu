@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf9f6;--bg2:#f1f3ee;--ink:#2b2f2a;--mute:#7b837a;--sage:#a9b8a0;--sage2:#6f8268;--line:#e2e6dd;--card:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1e1a;--bg2:#222620;--ink:#eef0ea;--mute:#a2aa9f;--line:#333a31;--card:#262b24}}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+body{background:var(--bg);color:var(--ink);font:300 16px/1.7 Jost,system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;letter-spacing:.02em}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:22px;justify-content:center;flex-wrap:wrap;padding:14px 20px;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+nav a{color:var(--mute);text-decoration:none;transition:.3s}nav a:hover{color:var(--sage2)}
+.hero{min-height:88vh;display:grid;place-content:center;text-align:center;padding:40px 24px;background:radial-gradient(circle at 20% 20%,var(--bg2),transparent 55%),radial-gradient(circle at 85% 80%,#a9b8a033,transparent 50%)}
+.hero small{letter-spacing:.4em;text-transform:uppercase;color:var(--sage2);font-size:12px;animation:up 1.2s both}
+.hero h1{font-size:clamp(48px,10vw,116px);line-height:1.02;margin:14px 0;animation:up 1.4s .2s both}
+.hero p{max-width:520px;margin:auto;color:var(--mute);animation:up 1.4s .5s both}
+.hero .line{width:1px;height:70px;background:var(--sage2);margin:34px auto 0;animation:grow 1.8s .8s both}
+@keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@keyframes grow{from{height:0}to{height:70px}}
+section{padding:90px 6vw;max-width:1200px;margin:auto}
+section h2{font-size:clamp(34px,5vw,56px);text-align:center}
+section .sub{text-align:center;color:var(--mute);margin:6px auto 44px;max-width:560px}
+section h2:after{content:"";display:block;width:46px;height:1px;background:var(--sage);margin:14px auto 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px}
+.card{background:var(--card);border:1px solid var(--line);cursor:pointer;overflow:hidden;transition:.5s}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px #6f826822}
+.card .im{aspect-ratio:3/4;background:linear-gradient(135deg,var(--bg2),var(--sage));overflow:hidden}
+.card img{width:100%;height:100%;object-fit:cover;transition:1s}.card:hover img{transform:scale(1.07)}
+.card div.t{padding:16px 18px}.card h3{font-size:24px}.card p{font-size:13px;color:var(--mute)}
+.alt{background:var(--bg2);max-width:none}.alt>*{max-width:1200px;margin-left:auto;margin-right:auto}
+.rv{opacity:0;transform:translateY(36px);transition:1s cubic-bezier(.2,.7,.2,1)}.rv.on{opacity:1;transform:none}
+.empty{text-align:center;color:var(--mute);font-style:italic;grid-column:1/-1}
+.pdf a,.btn{display:inline-block;padding:12px 28px;border:1px solid var(--sage2);color:var(--sage2);text-decoration:none;letter-spacing:.14em;text-transform:uppercase;font-size:12px;background:none;cursor:pointer;font-family:inherit;transition:.3s}
+.pdf a:hover,.btn:hover{background:var(--sage2);color:#fff}
+.pdf{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.about{display:grid;gap:30px;text-align:center;max-width:720px;margin:auto}.about p{white-space:pre-line;font-size:18px}
+footer{background:var(--ink);color:#eef0ea;text-align:center;padding:70px 24px calc(50px + env(safe-area-inset-bottom,0px))}
+footer h2{color:#eef0ea}footer a{color:var(--sage);text-decoration:none}
+footer .ct{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin:26px 0}
+#lb{position:fixed;inset:0;z-index:20;background:#101310ee;display:none;overflow:auto;padding:50px 5vw;color:#fff}
+#lb.on{display:block;animation:up .5s}#lb h3{font-size:38px;text-align:center}#lb p{text-align:center;opacity:.7;margin-bottom:24px}
+#lb .gal{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));max-width:1200px;margin:auto}
+#lb img{width:100%;border-radius:2px}#lb .x{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:22px;font-size:34px;cursor:pointer;background:none;border:0;color:#fff}
+#lb a.f{color:var(--sage);display:block;padding:12px;border:1px solid #fff3}
+.hero{position:relative;overflow:hidden}.hc{position:relative}
+.shapes{position:absolute;inset:0;pointer-events:none}.shapes b{position:absolute;display:block}
+.shapes i{display:block;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,var(--sage));opacity:.4;animation:fl 9s ease-in-out infinite}
+.shapes i.r{background:none;border:1px solid var(--sage2);opacity:.5}
+@keyframes fl{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-34px) rotate(14deg)}}
+.marq{overflow:hidden;white-space:nowrap;border-block:1px solid var(--line);background:var(--card);padding:16px 0}
+.marq div{display:inline-block;animation:mq 34s linear infinite;font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-style:italic;color:var(--sage2);letter-spacing:.1em}
+.marq span{margin:0 26px}@keyframes mq{to{transform:translateX(-50%)}}
+#glow{position:fixed;left:0;top:0;width:340px;height:340px;margin:-170px 0 0 -170px;border-radius:50%;background:radial-gradient(circle,#a9b8a066,transparent 65%);pointer-events:none;z-index:30;opacity:0;transition:opacity .4s}
+@media(hover:none){#glow{display:none}}
+input[type=checkbox]{width:auto;margin-right:10px}.tg{display:flex;align-items:center;margin:8px 0;text-transform:none;letter-spacing:0;font-size:15px;color:var(--ink)}
+/* admin */
+.adm{max-width:960px;margin:auto;padding:30px 5vw 80px}
+.adm h1{font-size:44px;text-align:center}.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:20px 0 28px}
+.tabs button{padding:8px 16px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;font:inherit;font-size:13px}
+.tabs button.on{background:var(--sage2);color:#fff;border-color:var(--sage2)}
+.panel{background:var(--card);border:1px solid var(--line);padding:24px;margin-bottom:20px}
+label{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:14px 0 4px}
+input,textarea{width:100%;padding:11px 13px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+textarea{min-height:110px}.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:16px}
+.it{display:flex;gap:14px;align-items:center;padding:12px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.it img,.it .ph{width:56px;height:70px;object-fit:cover;background:var(--bg2)}.it b{flex:1;min-width:120px;font-weight:500}
+.sm{padding:6px 12px;font-size:11px}.msg{color:var(--sage2);font-size:13px}
+.login{max-width:360px;margin:20vh auto;text-align:center;padding:0 20px}.login input{margin:18px 0}
+.sw{text-align:center;padding:30px;font-size:12px}.sw a{color:var(--sage2)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="lb"><button class="x" onclick="lb.classList.remove('on')">×</button><h3 id="lt"></h3><p id="ld"></p><div class="gal" id="lg"></div></div>
+<script>
+const SECS=[["collections","Collections","Signature collections and seasonal lines"],["moodboard","Mood Board","The feeling, colour and inspiration behind the work"],["storyboard","Storyboard","From the first idea to the final story"],["sketches","Sketches","Where every design begins"],["outfits","Final Outfits","The finished looks"],["projects","Project Work","Selected projects and case studies"]];
+const DEF={name:"Your Name",role:"Fashion Designer",tagline:"Designing quiet luxury with a soft, modern spirit.",about:"Write a few lines about yourself, your design journey and your vision.",linkedin:"https://www.linkedin.com/",email:"you@email.com",phone:"+91 00000 00000",location:"India",pw:"",marquee:"Indo-Western · Lehenga with Jacket · Saree Gown · Dhoti & Crop Top · Handcrafted Couture",anim:{shapes:1,parallax:1,glow:1,marquee:1,reveal:1}};
+let C={...DEF},items=[],db=null,assets=null,tab="text",authed=false,ready=false,msg="";
+const $=s=>document.querySelector(s),esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const sha=async t=>[...new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t)))].map(b=>b.toString(16).padStart(2,"0")).join("");
+const isImg=f=>(f.type||"").startsWith("image/");
+const url=f=>f.data||"/api/file/"+f.id;
+function ssec(k){return items.filter(i=>i.section===k).sort((a,b)=>(a.ts||0)-(b.ts||0))}
+function pubsec(k){const r=ssec(k);return r.length||k==="pdf"?r:(SAMPLES[k]||[])}
+const T={lehenga:"Lehenga with Jacket",gown:"Saree Gown",dress:"Indo-Western Dress",dhoti:"Dhoti & Crop Top"};
+const PAL={lehenga:["#8fa584","#c9a96a"],gown:["#e6e0d2","#a9b8a0"],dress:["#b9c8b0","#c9a96a"],dhoti:["#d9cdb8","#6f8268"]};
+const ALT={lehenga:["#c9b8a3","#8fa584"],gown:["#a9b8a0","#c9a96a"],dress:["#e8dccb","#6f8268"],dhoti:["#7f9476","#e9e4d8"]};
+const D=s=>"data:image/svg+xml;utf8,"+encodeURIComponent(s);
+function fig(t,col,p){const [m,g]=p||PAL[t];
+ const S={dress:"M120 90L180 90L168 175Q238 250 230 338Q150 368 76 356Q100 250 132 175Z",lehenga:"M110 158L190 158L254 362L46 362Z",gown:"M122 90L178 90L170 182Q204 272 194 362L106 362Q96 272 130 182Z",dhoti:"M128 150L172 150L210 300Q192 362 170 340Q150 275 150 275Q150 275 130 340Q108 362 90 300Z"}[t];
+ const Tp={dress:"M120 90L180 90L170 150L130 150Z",lehenga:"M112 90L188 90L198 152L102 152Z",gown:"M122 90L178 90L172 140L128 140Z",dhoti:"M120 90L180 90L174 140L126 140Z"}[t];
+ const Dr={dress:"M150 175L150 352M132 175Q120 260 100 352",lehenga:"M150 90Q58 160 68 300Q72 340 90 362",gown:"M122 90Q205 125 214 255Q218 320 236 362",dhoti:"M150 150L150 275M128 150Q150 200 172 150"}[t];
+ const sw=col?'stroke="#2b2f2a55" stroke-width="1"':'stroke="#2b2f2a" stroke-width="1.4"';
+ const legY=t==="dress"?360:t==="lehenga"?364:366;
+ return D(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400"><defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${m}"/><stop offset="1" stop-color="#fff" stop-opacity=".55"/></linearGradient><linearGradient id="b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7f5ef"/><stop offset="1" stop-color="#dde5d6"/></linearGradient></defs><rect width="300" height="400" fill="${col?"url(#b)":"#faf9f6"}"/>${col?"":'<path d="M150 14L150 392" stroke="#a9b8a0" stroke-dasharray="3 6"/>'}<g fill="none" stroke-linejoin="round" stroke-linecap="round"><path d="M120 90Q96 130 90 190M180 90Q204 130 210 190" stroke="${col?"#e3c9b4":"#2b2f2a"}" stroke-width="${col?6:1.4}"/><path d="M138 ${legY}L136 390M162 ${legY}L164 390" stroke="${col?"#e3c9b4":"#2b2f2a"}" stroke-width="${col?6:1.4}"/><ellipse cx="150" cy="52" rx="14" ry="17" fill="${col?"#ecd7c5":"none"}" ${sw}/><path d="M144 66L144 90M156 66L156 90" ${sw}/><path d="${S}" fill="${col?"url(#a)":"none"}" ${sw}/><path d="${Tp}" fill="${col?g:"none"}" ${sw}/><path d="${Dr}" stroke="${col?g:"#2b2f2a"}" stroke-width="${col?2.2:1}"/>${col?`<circle cx="150" cy="118" r="3" fill="#fff"/><circle cx="168" cy="128" r="2" fill="#fff"/><circle cx="132" cy="130" r="2" fill="#fff"/>`:""}</g></svg>`)}
+const msw=c=>D(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400"><rect width="300" height="400" fill="#faf9f6"/>${c.map((x,i)=>`<rect x="30" y="${30+i*88}" width="240" height="76" fill="${x}"/>`).join("")}</svg>`);
+const SAMPLES={};
+function mk(id,sec,title,list){return {id,section:sec,title,desc:"Sample illustration. Replace it from the admin page.",sample:1,files:list.map(d=>({data:d,name:title,type:"image/svg+xml"}))}}
+function buildSamples(){const ty=Object.keys(T);
+ SAMPLES.collections=ty.map(t=>mk("sc"+t,"collections",T[t],[fig(t,1)]));
+ SAMPLES.sketches=ty.map(t=>mk("sk"+t,"sketches",T[t]+" Sketch",[fig(t,0)]));
+ SAMPLES.outfits=ty.map(t=>mk("so"+t,"outfits",T[t],[fig(t,1,ALT[t])]));
+ SAMPLES.storyboard=ty.slice(0,3).map(t=>mk("ss"+t,"storyboard",T[t]+" Story",[fig(t,0),fig(t,1)]));
+ SAMPLES.moodboard=[["#e6e0d2","#a9b8a0","#6f8268","#c9a96a"],["#faf9f6","#d9cdb8","#8fa584","#2b2f2a"],["#e8dccb","#c9b8a3","#b9c8b0","#7f9476"]].map((c,n)=>mk("sm"+n,"moodboard","Palette "+(n+1),[msw(c)]));
+ SAMPLES.projects=[mk("sp1","projects","Indo-Western Capsule",[fig("dress",0),fig("dress",1),fig("gown",1)])]}
+const SHAPES='<div class="shapes">'+[[8,12,90,0,0],[78,16,150,1,1.5],[14,68,60,1,3],[84,70,110,0,2],[46,8,40,0,4],[60,62,70,1,5]].map(([x,y,s,r,d],n)=>`<b data-p="${(.08+n*.07).toFixed(2)}" style="left:${x}%;top:${y}%"><i class="${r?"r":""}" style="width:${s}px;height:${s}px;animation-delay:-${d}s"></i></b>`).join("")+'</div>';
+function MARQ(){const t=esc(C.marquee).split("·").map(x=>`<span>${x.trim()}</span><span>✦</span>`).join("").repeat(4);return `<div class="marq"><div>${t}</div></div>`}
+let tick=0;addEventListener("scroll",()=>{if(tick)return;tick=1;requestAnimationFrame(()=>{tick=0;if(!(C.anim||{}).parallax||scrollY>1200)return;document.querySelectorAll("[data-p]").forEach(e=>e.style.transform=`translateY(${scrollY*e.dataset.p}px)`)})},{passive:true});
+const gl=document.createElement("div");gl.id="glow";document.body.appendChild(gl);
+addEventListener("mousemove",e=>{if(!(C.anim||{}).glow||location.hash==="#admin"){gl.style.opacity=0;return}gl.style.opacity=1;gl.style.transform=`translate(${e.clientX}px,${e.clientY}px)`});
+function cardHtml(i){const f=(i.files||[]).find(isImg);return `<div class="card rv" onclick="openLb('${i.id}')"><div class="im">${f?`<img loading="lazy" src="${url(f)}" alt="${esc(i.title)}">`:""}</div><div class="t"><h3>${esc(i.title)}</h3><p>${esc((i.desc||"").slice(0,80))}</p></div></div>`}
+function pub(){
+ const A=C.anim||{};const pdfs=ssec("pdf").flatMap(i=>(i.files||[]).map(f=>({f,t:i.title})));
+ $("#app").innerHTML=`<nav>${SECS.map(s=>`<a href="#${s[0]}">${s[1]}</a>`).join("")}<a href="#portfolio">Portfolio PDF</a><a href="#about">About</a></nav>
+ <header class="hero">${A.shapes?SHAPES:""}<div class="hc" data-p=".22"><small>${esc(C.role)}</small><h1>${esc(C.name)}</h1><p>${esc(C.tagline)}</p><div class="line"></div></div></header>${A.marquee?MARQ():""}
+ ${SECS.map((s,n)=>{const l=pubsec(s[0]);return `<section id="${s[0]}" class="${n%2?"alt":""}"><h2 class="rv">${s[1]}</h2><p class="sub rv">${s[2]}</p><div class="grid">${l.length?l.map(cardHtml).join(""):`<p class="empty">Coming soon</p>`}</div></section>`}).join("")}
+ <section id="portfolio"><h2 class="rv">Portfolio</h2><p class="sub rv">Download my full portfolio</p><div class="pdf rv">${pdfs.length?pdfs.map(p=>`<a href="${url(p.f)}" target="_blank" rel="noopener">${esc(p.t||p.f.name)}</a>`).join(""):`<p class="empty">Portfolio file coming soon</p>`}</div></section>
+ <section id="about" class="alt"><h2 class="rv">About Me</h2><div class="about rv" style="margin-top:40px"><p>${esc(C.about)}</p></div></section>
+ <footer><h2>Let's Connect</h2><div class="ct"><a href="${esc(C.linkedin)}" target="_blank" rel="noopener">LinkedIn</a><a href="mailto:${esc(C.email)}">${esc(C.email)}</a><span>${esc(C.phone)}</span><span>${esc(C.location)}</span></div><small style="opacity:.5">© ${new Date().getFullYear()} ${esc(C.name)}</small></footer>`;
+ reveal();
+}
+function reveal(){if(C.anim&&!C.anim.reveal){document.querySelectorAll(".rv").forEach(e=>e.classList.add("on"));return}const o=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add("on");o.unobserve(x.target)}}),{threshold:.12});document.querySelectorAll(".rv").forEach(e=>o.observe(e))}
+function openLb(id){const i=items.find(x=>x.id===id)||Object.values(SAMPLES).flat().find(x=>x.id===id);if(!i)return;$("#lt").textContent=i.title;$("#ld").textContent=i.desc||"";$("#lg").innerHTML=(i.files||[]).map(f=>isImg(f)?`<img src="${url(f)}" alt="">`:`<a class="f" href="${url(f)}" target="_blank" rel="noopener">${esc(f.name)}</a>`).join("");$("#lb").classList.add("on")}
+buildSamples();pub();
+fetch("/api/data").then(r=>r.json()).then(j=>{const c=j.content||{};C={...DEF,...c,anim:{...DEF.anim,...(c.anim||{})}};items=j.items||[];pub()}).catch(()=>{});
+</script>
+</body>
+</html>
