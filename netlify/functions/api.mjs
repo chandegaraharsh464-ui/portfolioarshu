@@ -25,7 +25,18 @@ export default async (req) => {
     if (!r) return new Response("Not found", { status: 404 });
     return new Response(r.data, { headers: { "content-type": r.metadata?.type || "application/octet-stream", "cache-control": "public,max-age=31536000,immutable", "x-content-type-options": "nosniff" } });
   }
-  if (!ok(req)) return J({ error: "Please log in again" }, 401);
+  if (!ok(req)) return J({ error: "Please log in again" }, 401); 
+  if (p === "aistatus") return J({ ai: !!process.env.GEMINI_API_KEY });
+  if (p === "ai" && req.method === "POST") {
+    const key = process.env.GEMINI_API_KEY;
+    if (!key) return J({ error: "Add GEMINI_API_KEY in Netlify environment variables first." }, 400);
+    const b = await req.json().catch(() => ({}));
+    const model = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, { method: "POST", headers: { "content-type": "application/json", "x-goog-api-key": key }, body: JSON.stringify({ contents: [{ parts: [{ text: String(b.prompt || "").slice(0, 6000) }] }] }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) return J({ error: j.error?.message || "AI request failed (" + r.status + ")" }, 502);
+    return J({ text: (j.candidates?.[0]?.content?.parts || []).map(x => x.text).join("") || "No answer" });
+  }
   if (p === "save" && req.method === "POST") { const b = await req.json(); await st.setJSON("data", { content: b.content || {}, items: b.items || [] }); return J({ ok: 1 }); }
   if (p === "upload" && req.method === "POST") {
     const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
